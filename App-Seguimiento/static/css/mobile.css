@@ -1,0 +1,60 @@
+/* VERSIÓN MOBILE - CSS DEL FRONT END DE PLATAFORMA - TODOS LOS INTERNAUTAS*/
+
+#radioreproductor {
+    width: 300px;
+    text-align: center;
+}
+#audioList {
+    margin-top: 20px;
+}
+.audio-item {
+    cursor: pointer;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+}
+.audio-item img {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+#titulo {
+   font-weight: bolder;
+   
+}
+    
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas de igual tamaño */
+    gap: 10px; /* Espacio entre elementos */
+}
+
+
+.audio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 4 columnas de igual tamaño */
+    gap: 5px; /* Espacio entre elementos */
+    font-size: small;
+}
+
+
+
+    tr th {
+    text-align: center; 
+    padding: 20px;
+    text-decoration: none; 
+    }
+
+
+    footer {
+        background-color: #212529;
+        text-align: center;
+        margin-top: 10px; 
+        padding: 10px; 
+        text-decoration: none; 
+        font-weight: bold;
+        color: white;
+                       
+       }

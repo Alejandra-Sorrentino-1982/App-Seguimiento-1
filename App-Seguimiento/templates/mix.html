@@ -1,0 +1,190 @@
+<!-- FRONTEND- MIX PANTALLAS - TODOS LOS INTERNAUTAS -->
+
+<!-- EXTENDS TRAE NAVEGADOR/FOOTER PARA FRONTEND TODOS LOS INTERNAUTAS // VERSIÓN ESCRITORIO-->
+{% extends 'front-layout.html' %}
+
+{% block body %}
+
+
+
+<div id="opciones">
+    <h5>Reproductor 1</h5>
+    <select onchange="cargarYoutube(this.value, 0)">
+        <option value="">Selecciona una señal</option>
+        {% for option in options %}
+        <option value="{{ option[0] }}">{{ option[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <h5>Reproductor 2</h5>
+    <select onchange="cargarYoutube(this.value, 1)">
+        <option value="">Selecciona una señal</option>
+        {% for option in options %}
+        <option value="{{ option[0] }}">{{ option[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <h5>Reproductor 3</h5>
+    <select onchange="cargarYoutube(this.value, 2)">
+        <option value="">Selecciona una señal</option>
+        {% for option in options %}
+        <option value="{{ option[0] }}">{{ option[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <h5>Reproductor 4</h5>
+    <select onchange="cargarClappr(this.value, 0)">
+        <option value="">Selecciona una señal</option>
+        {% for moption in moptions %}
+        <option value="{{ moption[0] }}">{{ moption[1] }}</option>
+        {% endfor %}
+
+        
+    </select>
+
+    <h5>Reproductor 5</h5>
+    <select onchange="cargarClappr(this.value, 1)">
+        <option value="">Selecciona una señal</option>
+        {% for moption in moptions %}
+        <option value="{{ moption[0] }}">{{ moption[1] }}</option>
+        {% endfor %}
+    </select>
+
+
+    <h5>Reproductor 6</h5>
+    <select onchange="cargarClappr(this.value, 2)">
+        <option value="">Selecciona una señal</option>
+        {% for moption in moptions %}
+        <option value="{{ moption[0] }}">{{ moption[1] }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div id="reproductores">
+    <div class="row">
+        <div class="reproductor">
+            <div id="youtubePlayer0"></div>
+        </div>
+        <div class="reproductor">
+            <div id="youtubePlayer1"></div>
+        </div>
+        <div class="reproductor">
+            <div id="youtubePlayer2"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="reproductor">
+          <div id="clapprPlayer0" class="clapprPlayer"></div>
+        </div>
+        <div class="reproductor">
+          <div id="clapprPlayer1" class="clapprPlayer"></div>
+        </div>
+        <div class="reproductor">
+          <div id="clapprPlayer2" class="clapprPlayer"></div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<br><br>
+
+<div id="nuevoDiv"></div>
+
+<div style="text-align: center;">
+   <!--  <button id="capturaBtn">Capturar Pantalla</button> -->
+    <br><br>
+    <h5>Si algún medio no está disponible, consulte el acceso desde:</h5>
+    <h4><a href="http://localhost:3000/links">AQUÍ</a></h4>
+</div>
+
+
+
+<!-- Reproductores: TN, LN+, CrónicaTV -->
+<!-- Acordarse de cambiarlos acá si dejan de funcionar -->
+
+<script>
+    var players = [];
+
+    function onYouTubeIframeAPIReady() {
+        var initialVideoIds = [
+            'cb12KmMMDJA', 'G5pHuBCqgrs', 'avly0uwZzOE'
+        ];
+        for (var i = 0; i < 6; i++) {
+            players[i] = new YT.Player('youtubePlayer' + i, {
+                width: '350', //ancho
+                height: '230', //alto
+                videoId: initialVideoIds[i],
+                playerVars: {
+                    'autoplay': 1, // Cambia a 1 si quieres que se inicie automáticamente
+                    'mute': 1 // Asegúrate de que los reproductores estén muteados
+                }
+            });
+        }
+    }
+
+    function cargarYoutube(videoId, playerIndex) {
+        if (videoId) {
+            players[playerIndex].loadVideoById(videoId);
+            players[playerIndex].mute(); // Mute al cargar el nuevo video
+        }
+    }
+</script>
+
+
+<script>
+            
+    var clapprPlayers = [];
+   
+    const defaultVideo = "https://live-01-02-eltrece.vodgc.net/eltrecetv/index.m3u8?PlaylistM3UC";
+
+for (let i = 0; i < 3; i++) {
+clapprPlayers[i] = new Clappr.Player({
+source: defaultVideo,
+width: '350', //ancho
+height: '230', //alto
+parentId: '#clapprPlayer' + i,
+autoPlay: true,
+mute: true
+});
+}
+
+function cargarClappr(url, playerIndex) {
+if (clapprPlayers[playerIndex]) {
+// Si ya existe un reproductor, solo actualiza la fuente
+clapprPlayers[playerIndex].load(url);
+} else {
+// Si no existe, crea uno nuevo
+clapprPlayers[playerIndex] = new Clappr.Player({
+    source: url,
+    width: '350', //ancho
+    height: '230', //alto
+    parentId: '#clapprPlayer' + playerIndex,
+    autoPlay: true,
+    mute: true
+});
+}
+}
+
+</script>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+    document.getElementById('capturaBtn').addEventListener('click', function() {
+        html2canvas(document.getElementById('reproductores')).then(function(canvas) {
+            // Convertir el canvas a una imagen
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'captura.png';
+            link.click();
+        }).catch(function(error) {
+            console.error('Error al capturar:', error);
+        });
+    });
+</script>
+
+{% endblock %}

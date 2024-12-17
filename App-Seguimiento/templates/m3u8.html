@@ -1,0 +1,112 @@
+<!-- FRONTEND- M3U8 2 PANTALLAS - TODOS LOS INTERNAUTAS -->
+
+<!-- EXTENDS TRAE NAVEGADOR/FOOTER PARA FRONTEND TODOS LOS INTERNAUTAS // VERSIÓN ESCRITORIO-->
+{% extends 'front-layout.html' %}
+
+{% block body %}
+
+
+<div id="xopciones">
+    <h5>Reproductor 1</h5>
+    <select onchange="cargarClappr(this.value, 0)">
+        <option value="">Selecciona una señal</option>
+        {% for option in options %}
+        <option value="{{ option[0] }}">{{ option[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <h5>Reproductor 2</h5>
+    <select onchange="cargarClappr(this.value, 1)">
+        <option value="">Selecciona una señal</option> 
+        {% for option in options %}
+        <option value="{{ option[0] }}">{{ option[1] }}</option>
+        {% endfor %}
+    </select>
+
+</div>
+
+<div id="xreproductores">
+    <div class="row">
+
+      <div class="xreproductor">
+        <div id="clapprPlayer0" class="xclapprPlayer"></div>
+      </div>
+    
+      <div class="xreproductor">
+        <div id="clapprPlayer1" class="xclapprPlayer"></div>
+      </div>
+
+    </div>
+   
+</div>
+
+
+<div id="nuevoDiv"></div>
+
+<div style="text-align: center;">
+    <button id="capturaBtn">Capturar Pantalla OK</button>
+    <br><br>
+    <h5>Si algún medio no está disponible, consulte el acceso desde:</h5>
+    <h4><a href="http://localhost:3000/links">AQUÍ</a></h4>
+</div>
+
+
+<script>
+            
+    var clapprPlayers = [];
+   
+    const defaultVideo = "https://live-01-02-eltrece.vodgc.net/eltrecetv/index.m3u8?PlaylistM3UC";
+
+for (let i = 0; i < 6; i++) {
+clapprPlayers[i] = new Clappr.Player({
+source: defaultVideo,
+width: '530', //ancho
+height: '420', //alto
+parentId: '#clapprPlayer' + i,
+autoPlay: true,
+mute: true
+});
+}
+
+function cargarClappr(url, playerIndex) {
+if (clapprPlayers[playerIndex]) {
+// Si ya existe un reproductor, solo actualiza la fuente
+clapprPlayers[playerIndex].load(url);
+} else {
+// Si no existe, crea uno nuevo
+clapprPlayers[playerIndex] = new Clappr.Player({
+    source: url,
+    width: '530', //ancho
+    height: '420', //alto
+    parentId: '#clapprPlayer' + playerIndex,
+    autoPlay: true,
+    mute: true
+});
+}
+}
+
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+    document.getElementById('capturaBtn').addEventListener('click', function() {
+        html2canvas(document.getElementById('xreproductores')).then(function(canvas) {
+            // Convertir el canvas a una imagen
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'captura.png';
+            link.click();
+        }).catch(function(error) {
+            console.error('Error al capturar:', error);
+        });
+    });
+</script>
+
+
+
+
+{% endblock %}
+
+

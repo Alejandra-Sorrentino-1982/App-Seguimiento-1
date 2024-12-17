@@ -1,0 +1,57 @@
+<!-- FRONTEND- LOGIN - USUARIO ADMIN  -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel="stylesheet" href="https://bootswatch.com/5/zephyr/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}" />
+    
+    <title>Seguimiento de Medios</title>
+  </head>
+
+<body> 
+<div class="container">
+
+  <div class= "img" style="text-align: center;">
+
+    <img src="https://imgur.com/yCR59Tr.png"  width="200"
+      height="200">
+  </div>
+    
+    <br>
+      <h5 id="titulos">Login</h5>
+      <br>
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>  <!-- Mensaje de error -->
+    {% endif %}
+
+
+      <form class="form-signin" action="/login" method="POST">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="username" name="username" placeholder="Usuario">
+          <label for="username">Usuario</label>
+        </div>
+        <br>
+        <div class="form-floating mt-2">
+          <input type="password" class="form-control" name="password" placeholder="Contraseña">
+          <label for="password">Contraseña</label>
+        </div>
+        <br>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Ingresar</button>
+      </form>
+    
+
+
+</div>
+    
+  
+    <br><br>
+    <br><br>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>

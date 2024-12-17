@@ -1,0 +1,82 @@
+<!-- FRONTEND- USUARIO ADMIN - BUSCAR UN MEDIO PARA EDITAR OTROS DATOS -->
+
+<!-- EXTENDS TRAE NAVEGADOR/FOOTER PARA FRONTEND USUARIO ADMIN -->
+{% extends 'layout.html' %}
+
+{% block body %}
+
+
+<h3>Otros Datos - Buscar medio y editar datos</h3>
+<br>
+
+<!-- Cuadro de búsqueda -->
+<div class="col-md-6">
+    <form action="/otrosdatos" method="POST" class="form-inline"> <!-- Forma de búsqueda -->
+        <input type="text" name="search_query" placeholder="Nombre del Medio" class="form-control" required>
+        <br>
+        <button type="submit" class="btn btn-info">Buscar</button>
+    </form>
+</div>
+
+
+<br>
+
+<div class="col-md-8">
+
+    <!-- Sentencia Jinja que sirve para recibir mensaje si la BBDD se ejecutó correctamente -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+
+<br>
+
+
+<br><br>
+
+
+<h3>Otros Datos - Tabla de Medios</h3>
+
+<br><br>
+
+<div class="col-md-12">
+    <table class="table table-bordered bg-white" style="text-align: center;">
+        <thead style="text-align:center;">
+            <tr class="otrosdatos">
+                <td>País</td>
+                <td>Contenido</td>
+                <td>Tipo de Transmisión</td>
+                <td>Link Alternativo</td>
+                <td>Nombre del Medio - Yt</td>
+                <td>Nombre del Medio - M3u8</td>
+                <td>Nombre del Medio - Radio</td>
+                <td>Operaciones</td>
+            </tr>
+        </thead>
+        <tbody>
+        <!-- Trae la tabla de la BBDD -->
+        {% for otrodato in otrosdatos %}
+        <tr> 
+            <td>{{ otrodato.1 }}</td>
+            <td>{{ otrodato.2 }}</td>
+            <td>{{ otrodato.3 }}</td>
+            <td><a href ="{{ otrodato.4 }}" target="_blank">{{ otrodato.4 }}</a></td>
+            <td>{{ otrodato.8 if otrodato.8 is not none else '-' }}</td>
+            <td>{{ otrodato.9 if otrodato.9 is not none else '-' }}</td>
+            <td>{{ otrodato.10 if otrodato.10 is not none else '-' }}</td>    
+            <td><a href="/otrosdatosmodificar/{{ otrodato.0 }}" class="btn btn-secondary">Modificar</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br><br>
+{% endblock %}

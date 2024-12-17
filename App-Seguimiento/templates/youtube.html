@@ -1,0 +1,114 @@
+<!-- FRONTEND- YOUTUBE 2 PANTALLAS - TODOS LOS INTERNAUTAS -->
+
+<!-- EXTENDS TRAE NAVEGADOR/FOOTER PARA FRONTEND TODOS LOS INTERNAUTAS // VERSIÓN ESCRITORIO-->
+{% extends 'front-layout.html' %}
+
+{% block body %}
+
+
+
+<div id="xopciones">
+    <h5>Reproductor 1</h5>
+    <select onchange="cargarYoutube(this.value, 0)">
+        <option value="">Selecciona una señal</option>
+        {% for option in options %}
+        <option value="{{ option[0] }}">{{ option[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <h5>Reproductor 2</h5>
+    <select onchange="cargarYoutube(this.value, 1)">
+        <option value="">Selecciona una señal</option>
+        {% for option in options %}
+        <option value="{{ option[0] }}">{{ option[1] }}</option>
+        {% endfor %}
+    </select>
+
+</div>
+
+<div id="xreproductores">
+    <div class="row2">
+        <div class="xreproductor">
+            <div id="xyoutubePlayer0"></div>
+        </div>
+        <div class="xreproductor">
+            <div id="xyoutubePlayer1"></div>
+        </div>
+    </div>
+</div>
+
+<br><br>
+
+<div id="nuevoDiv"></div>
+
+<div style="text-align: center;">
+    <!--  <button id="capturaBtn">Capturar Pantalla</button> -->
+    <br><br>
+    <h5>Si algún medio no está disponible, consulte el acceso desde:</h5>
+    <h4><a href="http://localhost:3000/links">AQUÍ</a></h4>
+</div>
+
+
+<!-- Reproductores: TN, LN+ -->
+<!-- Acordarse de cambiarlos acá si dejan de funcionar -->
+
+<script>
+    var players = [];
+
+    function onYouTubeIframeAPIReady() {
+        var initialVideoIds = [
+            'cb12KmMMDJA', 'G5pHuBCqgrs'
+        ];
+        for (var i = 0; i < 6; i++) {
+            players[i] = new YT.Player('xyoutubePlayer' + i, {
+                width: '530', //ancho
+                height: '420', //alto
+          
+            
+                videoId: initialVideoIds[i],
+                playerVars: {
+                    'autoplay': 1, // Cambia a 1 si quieres que se inicie automáticamente
+                    'mute': 1 // Asegúrate de que los reproductores estén muteados
+                }
+            });
+        }
+    }
+
+    function cargarYoutube(videoId, playerIndex) {
+        if (videoId) {
+            players[playerIndex].loadVideoById(videoId);
+            players[playerIndex].mute(); // Mute al cargar el nuevo video
+        }
+    }
+
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+<script>
+    document.getElementById('capturaBtn').addEventListener('click', function() {
+        html2canvas(document.getElementById('xreproductores'), { 
+            useCORS: true,
+            allowTaint: true 
+        }).then(function(canvas) {
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'captura.png';
+            link.click();
+        }).catch(function(error) {
+            console.error('Error al capturar:', error);
+        });
+    });
+</script>
+
+
+{% endblock %}
+
+
+
+
+
+
+

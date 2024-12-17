@@ -1,0 +1,118 @@
+<!-- FRONTEND- USUARIO ADMIN - DATOS ADMIN -->
+
+<!-- EXTENDS TRAE NAVEGADOR/FOOTER PARA FRONTEND USUARIO ADMIN -->
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class= "img" style="text-align: center;">
+
+    <img src="https://imgur.com/NiENfmb.png"  width="100"
+      height="80">
+  </div>
+<br>
+
+  <h3 style="text-align: center;">ABM - Usuarios / Administradores - Editores</h3>
+
+<br>
+
+{% if es_admin %}
+<h4 style="text-align: center;">¡Bienvenido Administrador!</h4>
+{% endif %}
+
+<br>
+<br>
+
+<div class="col-md-10">
+    {% if es_admin %}
+    <form action="/agregar4" method="POST"> <!-- Solo visible para administradores -->
+        <div class="form-group row">
+            <label for="username" style= "width: 20%;" class="col-sm-4 col-form-label">Usuario</label>
+            <div class="col-sm-8">
+                <input type="text" name="username" placeholder="" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="password" style= "width: 20%;" class="col-sm-4 col-form-label">Contraseña</label>
+            <div class="col-sm-8">
+                <input type="text" name="password" placeholder="" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="tipo" style= "width: 20%;" class="col-sm-4 col-form-label">Tipo de Usuario</label>
+            <div class="col-sm-8">
+                <input type="text" name="tipo" placeholder="" class="form-control" required>
+            </div>
+        </div>
+
+        <br>
+        <div class="form-group"> 
+            <button type="submit" class="btn btn-info btn-block">Enviar</button>
+            <button type="reset" class="btn btn-secondary btn-block">Cancelar</button>
+        </div>  
+    </form>
+    {% endif %}
+</div>
+
+<br>
+
+<div class="col-md-8">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+
+<br><br>
+
+<h3>Tabla de Usuarios</h3>
+
+<br>
+<div class="col-md-8">
+    {% if es_admin %}
+    <button onclick="window.location.href='/descargar_excel4'" class="btn btn-secondary">Descargar Tabla en Excel</button>
+    {% endif %}
+</div>
+
+<br><br>
+
+<div class="col-md-8">
+<table class="table table-bordered bg-white">
+<thead style="text-align:center;">
+<tr class="otrosdatos" style="text-align: center;">
+<td>Usuario</td>
+<td>Contraseña</td>
+<td>Tipo de Usuario</td>
+<td>Operaciones</td>
+</tr>
+</thead>
+<tbody>
+{% for usuario in usuarios %}
+<tr style="text-align: center;">
+<td>{{ usuario.1 }}</td> 
+<td>{{ usuario.2 }}</td>
+<td>{{ usuario.3 }}</td>
+<td>
+    {% if es_admin %}
+        <a href="/modificar4/{{ usuario.0 }}" class="btn btn-secondary">Modificar</a>
+        <a href="/eliminar4/{{ usuario.0 }}" class="btn btn-danger btn-delete">Eliminar</a>
+    {% elif usuario.1 == session['username'] %}
+        <a href="/modificar4/{{ usuario.0 }}" class="btn btn-secondary">Modificar</a> <!-- Solo el editor puede modificar su propio usuario -->
+    {% endif %}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<br><br>
+{% endblock %}

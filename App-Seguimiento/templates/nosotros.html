@@ -1,0 +1,95 @@
+<!-- FRONTEND- COLABORÁ CON NOSOTROS - TODOS LOS INTERNAUTAS -->
+
+<!-- TELEGRAM, MP, ENVIAR MENSAJES -->
+
+<!-- EXTENDS TRAE NAVEGADOR/FOOTER PARA FRONTEND TODOS LOS INTERNAUTAS // VERSIÓN MOBILE-->
+{% extends 'frontmobile.html' %}
+
+{% block body %}
+
+<h4 class="titulotablacable">Colaborá con Nosotros</h4>
+    
+<br>
+<p> Podés realizar tu donación vía Mercado Pago:</p>
+<p><a
+    href="https://www.mercadopago.com.ar/"
+    target="_blank">
+    <img src="https://d2r9epyceweg5n.cloudfront.net/apps/5576-es_AR-Mercado%20Pago.jpg" height="50px" width="50px"> </a> </p>
+    <p>Alias: seguimiento.medios.mp</p>
+    <p><b>**dato ficticio**</b></p>
+<br><br>
+
+<h4>Vías de contacto:</h4>
+
+<br>
+<p> Formá parte de nuestro grupo de Telegram:</p>
+<p> <a
+  href="https://t.me/+Ni-ZZK0ZnWIyZDlh"
+  target="_blank"
+  ><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Telegram_2019_Logo.svg/150px-Telegram_2019_Logo.svg.png" height="50px" width="50px"></a>
+</p>
+<p><b>**dato verdadero**</b></p>
+
+<br><br>
+
+<h4>Envianos tu sugerencia:</h4>
+
+<br>
+
+<div class="col-md-8">
+
+<form action="/agregarmensaje" method="POST"> <!-- dirige a la ruta agregar, con método post -->
+
+    <div class="form-group row"> <!-- Usamos 'row' para crear un grid -->
+        <label for="dato1" style= "width: 20%;" class="col-sm-4 col-form-label">Nombre:</label> <!-- Alineación a la izquierda -->
+        <div class="col-sm-8"> <!-- Espacio para el input -->
+            <input type="text" name="dato1" placeholder="" class="form-control" required>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="dato2"style= "width: 20%;" class="col-sm-4 col-form-label">Email:</label>
+        <div class="col-sm-8">
+            <input type="text" name="dato2" placeholder="" class="form-control" required>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="dato3" style= "width: 20%;"class="col-sm-4 col-form-label">Mensaje:</label>
+        <div class="col-sm-8">
+            <input type="text" name="dato3" placeholder="" class="form-control" required>
+        </div>
+    </div>
+
+    <br>
+    <div class="form-group"> 
+        <button type="submit" class="btn btn-info btn-block">Enviar</button><!-- Estilo para botón enviar -->
+        <button type="reset" class="btn btn-secondary btn-block">Cancelar</button><!-- Estilo para botón cancelar -->
+    </div>  
+</form>
+</div>
+
+
+<br>
+
+<div class="col-md-8">
+
+    <!-- Sentencia Jinja que sirve para recibir mensaje si la BBDD se ejecutó correctamente -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+
+
+
+<br><br>
+{% endblock %}
+
+

@@ -1,0 +1,66 @@
+<!-- FRONTEND- M3U8 - TODOS LOS INTERNAUTAS -->
+
+<!-- TRAE NAVEGADOR/FOOTER PARA FRONTEND TODOS LOS INTERNAUTAS // VERSIÓN MOBILE-->
+{% extends 'frontmobile.html' %}
+
+{% block body %}
+
+<div id="reproductor">
+    <div id="clapprPlayer"></div>
+    <br>
+    <div id="videoList" class="video-grid">
+        {% for option in options %}
+        <div class="video-item" onclick="cargarClappr('{{ option[0] }}', '{{ loop.index0 }}');">
+            <img src="{{ option[1] }}" width="25" height="25">
+        </div>
+        {% if loop.index % 4 == 0 %}
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+
+<script>
+
+    var clapprPlayer;
+     // Inicializar el reproductor Clappr
+     function initClappr() {
+        clapprPlayer = new Clappr.Player({
+            source: 'https://live-01-02-eltrece.vodgc.net/eltrecetv/index.m3u8?PlaylistM3UC', // Inicialmente vacío
+            width: '100%',
+            height: '280',
+            parentId: '#clapprPlayer',
+            autoPlay: true,
+            mute: true
+        });
+    }
+
+   
+    function cargarClappr(url) {
+        // Si ya existe un reproductor, destrúyelo
+        if (clapprPlayer) {
+            clapprPlayer.destroy();
+        }
+        
+        // Crea un nuevo reproductor
+        clapprPlayer = new Clappr.Player({
+            source: url,
+            height: '280', // Ajusta según tus necesidades
+            width: '100%',
+            parentId: '#clapprPlayer',
+            autoPlay: true,
+            mute: true
+
+        })
+    }
+    
+
+    // Llamar a initClappr al cargar la página
+    window.onload = initClappr;
+</script>
+
+<br><br>
+<br><br>
+
+{% endblock %}

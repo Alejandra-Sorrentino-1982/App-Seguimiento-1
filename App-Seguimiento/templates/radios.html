@@ -1,0 +1,294 @@
+<!-- FRONTEND - RADIOS 6 REPRODUCTORES - TODOS LOS INTERNAUTAS -->
+
+<!-- EXTENDS TRAE NAVEGADOR/FOOTER PARA FRONTEND TODOS LOS INTERNAUTAS // VERSIÓN ESCRITORIO-->
+{% extends 'front-layout.html' %}
+
+{% block body %}
+
+<div id="radioreproductor">
+    <h4 style="text-align: center;">Reproductores - Radios</h4>
+</div>
+<br><br>
+
+<div id="radioreproductores">
+    <div class="fila">
+        <div class="radiorep">
+            <audio id="audioPlayer" controls>
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+            <select onchange="cargarAudio1(this.value)">
+                <option value="">Selecciona una radio</option>
+                {% for option in options %}
+                <option value="{{ option[0] }},{{ option[1] }}">{{ option[2] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="radiorep">
+            <audio id="audioPlayer2" controls>
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+            <select onchange="cargarAudio2(this.value)">
+                <option value="">Selecciona una radio</option>
+                {% for option in options %}
+                <option value="{{ option[0] }},{{ option[1] }}">{{ option[2] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="radiorep">
+            <audio id="audioPlayer3" controls>
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+            <select onchange="cargarAudio3(this.value)">
+                <option value="">Selecciona una radio</option>
+                {% for option in options %}
+                <option value="{{ option[0] }},{{ option[1] }}">{{ option[2] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="fila">
+        <div class="radiorep">
+            <audio id="audioPlayer4" controls>
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+            <select onchange="cargarAudio4(this.value)">
+                <option value="">Selecciona una radio</option>
+                {% for option in options %}
+                <option value="{{ option[0] }},{{ option[1] }}">{{ option[2] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="radiorep">
+            <audio id="audioPlayer5" controls>
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+            <select onchange="cargarAudio5(this.value)">
+                <option value="">Selecciona una radio</option>
+                {% for option in options %}
+                <option value="{{ option[0] }},{{ option[1] }}">{{ option[2] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="radiorep">
+            <audio id="audioPlayer6" controls>
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+            <select onchange="cargarAudio6(this.value)">
+                <option value="">Selecciona una radio</option>
+                {% for option in options %}
+                <option value="{{ option[0] }},{{ option[1] }}">{{ option[2] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<script>
+    function cargarAudio1(value) {
+        var audioPlayer = document.getElementById('audioPlayer');
+        
+        if (value === "") return; // No hacer nada si no se selecciona nada
+
+        var parts = value.split(',');
+        var url = parts[0]; // URL de la radio
+        var type = parts[1]; // Tipo de formato
+
+        if (type === 'mp3' || type === 'aac' || type === 'opus') {
+            audioPlayer.src = url; // Cambia la fuente del audio
+            audioPlayer.load(); // Carga la nueva fuente
+            audioPlayer.play(); // Reproduce automáticamente
+        } else if (type === 'hls') {
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(audioPlayer);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    audioPlayer.play();
+                });
+            } else if (audioPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+                audioPlayer.src = url;
+                audioPlayer.addEventListener('loadedmetadata', function() {
+                    audioPlayer.play();
+                });
+            }
+        }
+    }
+</script>
+
+
+<script>
+    function cargarAudio2(value) {
+        var audioPlayer = document.getElementById('audioPlayer2');
+        
+        if (value === "") return; // No hacer nada si no se selecciona nada
+
+        var parts = value.split(',');
+        var url = parts[0]; // URL de la radio
+        var type = parts[1]; // Tipo de formato
+
+        if (type === 'mp3' || type === 'aac' || type === 'opus') {
+            audioPlayer.src = url; // Cambia la fuente del audio
+            audioPlayer.load(); // Carga la nueva fuente
+            audioPlayer.play(); // Reproduce automáticamente
+        } else if (type === 'hls') {
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(audioPlayer);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    audioPlayer.play();
+                });
+            } else if (audioPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+                audioPlayer.src = url;
+                audioPlayer.addEventListener('loadedmetadata', function() {
+                    audioPlayer.play();
+                });
+            }
+        }
+    }
+</script>
+
+
+
+<script>
+    function cargarAudio3(value) {
+        var audioPlayer = document.getElementById('audioPlayer3');
+        
+        if (value === "") return; // No hacer nada si no se selecciona nada
+
+        var parts = value.split(',');
+        var url = parts[0]; // URL de la radio
+        var type = parts[1]; // Tipo de formato
+
+        if (type === 'mp3' || type === 'aac' || type === 'opus') {
+            audioPlayer.src = url; // Cambia la fuente del audio
+            audioPlayer.load(); // Carga la nueva fuente
+            audioPlayer.play(); // Reproduce automáticamente
+        } else if (type === 'hls') {
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(audioPlayer);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    audioPlayer.play();
+                });
+            } else if (audioPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+                audioPlayer.src = url;
+                audioPlayer.addEventListener('loadedmetadata', function() {
+                    audioPlayer.play();
+                });
+            }
+        }
+    }
+</script>
+
+
+<script>
+    function cargarAudio4(value) {
+        var audioPlayer = document.getElementById('audioPlayer4');
+        
+        if (value === "") return; // No hacer nada si no se selecciona nada
+
+        var parts = value.split(',');
+        var url = parts[0]; // URL de la radio
+        var type = parts[1]; // Tipo de formato
+
+        if (type === 'mp3' || type === 'aac' || type === 'opus') {
+            audioPlayer.src = url; // Cambia la fuente del audio
+            audioPlayer.load(); // Carga la nueva fuente
+            audioPlayer.play(); // Reproduce automáticamente
+        } else if (type === 'hls') {
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(audioPlayer);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    audioPlayer.play();
+                });
+            } else if (audioPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+                audioPlayer.src = url;
+                audioPlayer.addEventListener('loadedmetadata', function() {
+                    audioPlayer.play();
+                });
+            }
+        }
+    }
+</script>
+
+
+<script>
+    function cargarAudio5(value) {
+        var audioPlayer = document.getElementById('audioPlayer5');
+        
+        if (value === "") return; // No hacer nada si no se selecciona nada
+
+        var parts = value.split(',');
+        var url = parts[0]; // URL de la radio
+        var type = parts[1]; // Tipo de formato
+
+        if (type === 'mp3' || type === 'aac' || type === 'opus') {
+            audioPlayer.src = url; // Cambia la fuente del audio
+            audioPlayer.load(); // Carga la nueva fuente
+            audioPlayer.play(); // Reproduce automáticamente
+        } else if (type === 'hls') {
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(audioPlayer);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    audioPlayer.play();
+                });
+            } else if (audioPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+                audioPlayer.src = url;
+                audioPlayer.addEventListener('loadedmetadata', function() {
+                    audioPlayer.play();
+                });
+            }
+        }
+    }
+</script>
+
+<script>
+    function cargarAudio6(value) {
+        var audioPlayer = document.getElementById('audioPlayer6');
+        
+        if (value === "") return; // No hacer nada si no se selecciona nada
+
+        var parts = value.split(',');
+        var url = parts[0]; // URL de la radio
+        var type = parts[1]; // Tipo de formato
+
+        if (type === 'mp3' || type === 'aac' || type === 'opus') {
+            audioPlayer.src = url; // Cambia la fuente del audio
+            audioPlayer.load(); // Carga la nueva fuente
+            audioPlayer.play(); // Reproduce automáticamente
+        } else if (type === 'hls') {
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(audioPlayer);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    audioPlayer.play();
+                });
+            } else if (audioPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+                audioPlayer.src = url;
+                audioPlayer.addEventListener('loadedmetadata', function() {
+                    audioPlayer.play();
+                });
+            }
+        }
+    }
+</script>
+<br><br>
+<br><br>
+
+{% endblock %}
+
+
+

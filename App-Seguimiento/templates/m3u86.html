@@ -1,0 +1,158 @@
+<!-- FRONTEND- M3U8 6 PANTALLAS - TODOS LOS INTERNAUTAS -->
+
+<!-- EXTENDS TRAE NAVEGADOR/FOOTER PARA FRONTEND TODOS LOS INTERNAUTAS // VERSIÓN ESCRITORIO-->
+{% extends 'front-layout.html' %}
+
+{% block body %}
+
+
+
+<div id="opciones">
+    <h5>Reproductor 1</h5>
+    <select onchange="cargarClappr(this.value, 0)">
+        <option value="">Selecciona una señal</option>
+        {% for option in options %}
+        <option value="{{ option[0] }}">{{ option[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <h5>Reproductor 2</h5>
+    <select onchange="cargarClappr(this.value, 1)">
+        <option value="">Selecciona una señal</option> 
+        {% for option in options %}
+        <option value="{{ option[0] }}">{{ option[1] }}</option>
+        {% endfor %}
+    </select>
+
+
+    <h5>Reproductor 3</h5>
+    <select onchange="cargarClappr(this.value, 2)">
+        <option value="">Selecciona una señal</option>
+        {% for option in options %}
+        <option value="{{ option[0] }}">{{ option[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <h5>Reproductor 4</h5>
+    <select onchange="cargarClappr(this.value, 3)">
+        <option value="">Selecciona una señal</option>
+        {% for option in options %}
+        <option value="{{ option[0] }}">{{ option[1] }}</option>
+        {% endfor %}
+
+    </select>
+
+    <h5>Reproductor 5</h5>
+    <select onchange="cargarClappr(this.value, 4)">
+        <option value="">Selecciona una señal</option>
+        {% for option in options %}
+        <option value="{{ option[0] }}">{{ option[1] }}</option>
+        {% endfor %}
+    </select>
+
+
+    <h5>Reproductor 6</h5>
+    <select onchange="cargarClappr(this.value, 5)">
+        <option value="">Selecciona una señal</option>
+        {% for option in options %}
+        <option value="{{ option[0] }}">{{ option[1] }}</option>
+        {% endfor %}
+    </select>
+
+</div>
+
+<div id="reproductores">
+    <div class="row">
+      <div class="reproductor">
+        <div id="clapprPlayer0" class="clapprPlayer"></div>
+    </div>
+    <div class="reproductor">
+        <div id="clapprPlayer1" class="clapprPlayer"></div>
+    </div>
+    <div class="reproductor">
+        <div id="clapprPlayer2" class="clapprPlayer"></div>
+        </div>
+    </div>
+  <div class="row">
+    <div class="reproductor">
+        <div id="clapprPlayer3" class="clapprPlayer"></div>
+    </div>
+    <div class="reproductor">
+        <div id="clapprPlayer4" class="clapprPlayer"></div>
+    </div>
+    <div class="reproductor">
+        <div id="clapprPlayer5" class="clapprPlayer"></div>
+    </div>
+    </div>
+</div>
+
+
+<div id="nuevoDiv"></div>
+
+<div style="text-align: center;">
+    <button id="capturaBtn">Capturar Pantalla OK</button>
+    <br><br>
+    <h5>Si algún medio no está disponible, consulte el acceso desde:</h5>
+    <h4><a href="http://localhost:3000/links">AQUÍ</a></h4>
+</div>
+
+
+<script>
+            
+    var clapprPlayers = [];
+   
+    const defaultVideo = "https://live-01-02-eltrece.vodgc.net/eltrecetv/index.m3u8?PlaylistM3UC";
+
+for (let i = 0; i < 6; i++) {
+clapprPlayers[i] = new Clappr.Player({
+source: defaultVideo,
+height: '230',
+width: '350',
+parentId: '#clapprPlayer' + i,
+autoPlay: true,
+mute: true
+});
+}
+
+function cargarClappr(url, playerIndex) {
+if (clapprPlayers[playerIndex]) {
+// Si ya existe un reproductor, solo actualiza la fuente
+clapprPlayers[playerIndex].load(url);
+} else {
+// Si no existe, crea uno nuevo
+clapprPlayers[playerIndex] = new Clappr.Player({
+    source: url,
+    height: '230',
+    width: '350',
+    parentId: '#clapprPlayer' + playerIndex,
+    autoPlay: true,
+    mute: true
+});
+}
+}
+
+</script>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+    document.getElementById('capturaBtn').addEventListener('click', function() {
+        html2canvas(document.getElementById('reproductores')).then(function(canvas) {
+            // Convertir el canvas a una imagen
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'captura.png';
+            link.click();
+        }).catch(function(error) {
+            console.error('Error al capturar:', error);
+        });
+    });
+</script>
+
+
+
+
+{% endblock %}

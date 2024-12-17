@@ -1,0 +1,59 @@
+<!-- FRONTEND- RADIOS - TODOS LOS INTERNAUTAS -->
+
+<!-- TRAE NAVEGADOR/FOOTER PARA FRONTEND TODOS LOS INTERNAUTAS // VERSIÓN MOBILE-->
+ {% extends 'frontmobile.html' %}
+
+{% block body %}
+
+<div id="radioreproductor">
+    <h4 id="radioName">Selecciona una radio</h4>
+    <br>
+    <audio id="audioPlayer" controls>
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <div id="audioList" class="audio-grid">
+        {% for dato in datos %}
+            <div class="audio-item" onclick="cargarAudio('{{ dato[0] }}', '{{ dato[1] }}', '{{ dato[3] }}');">
+                <img src="{{ dato[2] }}" alt="{{ dato[3] }}"> {{ dato[3] }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<script>
+    function cargarAudio(url, type, name) {
+        var audioPlayer = document.getElementById('audioPlayer');
+        var radioName = document.getElementById('radioName');
+
+        // Actualiza el nombre de la radio
+        radioName.textContent = name;
+
+        if (type === 'mp3' || type === 'aac' || type === 'opus') {
+            audioPlayer.src = url; // Cambia la fuente del audio
+            audioPlayer.load(); // Carga la nueva fuente
+            audioPlayer.play(); // Reproduce automáticamente
+        } else if (type === 'hls') {
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(audioPlayer);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    audioPlayer.play();
+                });
+            } else if (audioPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+                audioPlayer.src = url;
+                audioPlayer.addEventListener('loadedmetadata', function() {
+                    audioPlayer.play();
+                });
+            }
+        }
+    }
+</script>
+
+<br><br>
+<br><br>
+
+{% endblock %}

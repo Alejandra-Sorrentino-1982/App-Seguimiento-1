@@ -1,0 +1,70 @@
+<!-- FRONTEND- USUARIO ADMIN - MODIFICAR BBDD RADIOS -->
+
+<!-- EXTENDS TRAE NAVEGADOR/FOOTER PARA FRONTEND USUARIO ADMIN -->
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<h3>Editar datos del medio - Radios</h3>
+
+
+<br>
+
+<div class="col-md-10">
+
+ <!-- trae la tabla de la base de datos orgina y permitirá editarla -->
+ <form action ="/update3/{{ radiostablaeditar.0 }}" method="POST">
+
+
+        <div class="form-group row"> <!-- Usamos 'row' para crear un grid -->
+            <label for="dato1" style= "width: 20%;" class="col-sm-4 col-form-label">Reproductor</label> <!-- Alineación a la izquierda -->
+            <div class="col-sm-8"> <!-- Espacio para el input -->
+                <input type="text" name="dato1" placeholder="" value="{{ radiostablaeditar.1 }}" class="form-control" required>
+            </div>
+        </div>
+    
+        <div class="form-group row">
+            <label for="dato2"style= "width: 20%;" class="col-sm-4 col-form-label">Tipo de Medio</label>
+            <div class="col-sm-8">
+                <input type="text" name="dato2" placeholder="" value="{{ radiostablaeditar.2 }}" class="form-control" required>
+            </div>
+        </div>
+    
+        <div class="form-group row">
+            <label for="dato3" style= "width: 20%;"class="col-sm-4 col-form-label">Nombre del Medio</label>
+            <div class="col-sm-8">
+                <input type="text" name="dato3" placeholder="" value="{{ radiostablaeditar.3 }}" class="form-control" required>
+            </div>
+        </div>
+    
+        <div class="form-group row">
+            <label for="dato4" style= "width: 20%;"class="col-sm-4 col-form-label">Link Trasmisión</label>
+            <div class="col-sm-8">
+                <input type="text" name="dato4" placeholder="" value="{{ radiostablaeditar.4 }}" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="dato5" style= "width: 20%;"class="col-sm-4 col-form-label">Link Imagen</label>
+            <div class="col-sm-8">
+                <input type="text" name="dato5" placeholder="" value="{{ radiostablaeditar.5 }}" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="dato6" style= "width: 20%;"class="col-sm-4 col-form-label">Link del Medio</label>
+            <div class="col-sm-8">
+                <input type="text" name="dato6" placeholder="" value="{{ radiostablaeditar.6 }}" class="form-control" required>
+            </div>
+        </div>
+
+        <br>
+        <div class="form-group"> 
+            <button type="submit" class="btn btn-info btn-block">Modificar</button>
+            <button type="reset" class="btn btn-secondary btn-block"><a href="/bbddradios" style="text-decoration: none;">Volver a Radios</a></button><!-- cancela y vuelve a inicio-->
+                </div>  
+    </form>
+    </div>
+
+<br><br>
+{% endblock %}

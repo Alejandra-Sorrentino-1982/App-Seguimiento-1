@@ -1,0 +1,63 @@
+<!-- FRONTEND- LINKS - TODOS LOS INTERNAUTAS -->
+
+<!-- EXTENDS TRAE NAVEGADOR/FOOTER PARA FRONTEND TODOS LOS INTERNAUTAS // VERSIÓN MOBILE-->
+{% extends 'frontmobile.html' %}
+
+{% block body %}
+
+<h4 id="titulo">Links de Medios</h4>
+<br><br>
+
+<table>
+    <tr>
+        {% for youtube in youtubes %}
+        <th class="thlinks">
+            <a href="{{ youtube[1] }}" target="_blank">
+                <img src="{{ youtube[0] }}" width="45" height="45">
+            </a>
+        </th>
+        {% if loop.index % 10 == 0 %}
+    </tr><tr> <!-- Cambia de fila cada 10 elementos -->
+        {% endif %}
+        {% endfor %}
+    </tr>
+</table>
+
+<br>
+
+<table>
+    <tr>
+        {% for m3u8 in m3u8s %}
+        <th class="thlinks">
+            <a href="{{ m3u8[1] }}" target="_blank">
+                <img src="{{ m3u8[0] }}" width="45" height="45" alt="m3u8 Link">
+            </a>
+        </th>
+        {% if loop.index % 10 == 0 %}
+    </tr><tr> <!-- Cambia de fila cada 10 elementos -->
+        {% endif %}
+        {% endfor %}
+    </tr>
+</table>
+
+<br>
+
+<table>
+    <tr>
+        {% for radio in radios %}
+        <th class="thlinks">
+            <a href="{{ radio[1] }}" target="_blank">
+                <img src="{{ radio[0] }}" width="45" height="45" alt="Radio Link">
+            </a>
+        </th>
+        {% if loop.index % 10 == 0 %}
+    </tr><tr> <!-- Cambia de fila cada 10 elementos -->
+        {% endif %}
+        {% endfor %}
+    </tr>
+</table>
+
+<br><br><br><br>
+
+{% endblock %}
+

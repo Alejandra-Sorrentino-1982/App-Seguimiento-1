@@ -1,0 +1,41 @@
+<!-- FRONTEND- YOUTUBE - TODOS LOS INTERNAUTAS -->
+
+<!-- EXTENDS TRAE NAVEGADOR/FOOTER PARA FRONTEND TODOS LOS INTERNAUTAS // VERSIÓN MOBILE-->
+{% extends 'frontmobile.html' %}
+
+{% block body %}
+
+<div id="reproductor">
+    <div id="youtubePlayer"></div>
+    <br><br>
+    <div id="videoList" class="video-grid">
+        {% for video_id, image_url in options %}
+        <div class="video-item" onclick="cargarYoutube('{{ video_id }}');">
+            <img src="{{ image_url }}" width="25" height="25">
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    var player;
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('youtubePlayer', {
+            width: '100%',
+            height: '280',
+            videoId: '{{ options[0][0] }}',  // Carga el primer video por defecto
+        });
+    }
+
+    function cargarYoutube(videoId) {
+        player.loadVideoById(videoId); // Carga el video seleccionado
+    }
+</script>
+
+
+<br><br>
+<br><br>
+
+{% endblock %}
+

@@ -1,0 +1,150 @@
+<!-- FRONTEND- USUARIO ADMIN - BBDD YOUTUBE -->
+
+<!-- EXTENDS TRAE NAVEGADOR/FOOTER PARA FRONTEND USUARIO ADMIN -->
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class= "img" style="text-align: center;">
+
+    <img src="https://imgur.com/zcU9Opj.png"  width="120"
+      height="80">
+  </div>
+
+  
+<br><br>
+
+  <h3 style="text-align: center;">Carga de medios - Youtube</h3>
+
+  
+<br><br>
+
+<div class="col-md-10">
+
+<form action="/agregar" method="POST"> <!-- dirige a la ruta agregar, con método post -->
+
+    <div class="form-group row"> <!-- Usamos 'row' para crear un grid -->
+        <label for="dato1" style= "width: 20%;" class="col-sm-4 col-form-label">Reproductor</label> <!-- Alineación a la izquierda -->
+        <div class="col-sm-8"> <!-- Espacio para el input -->
+            <input type="text" name="dato1" placeholder="" class="form-control" required>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="dato2"style= "width: 20%;" class="col-sm-4 col-form-label">Tipo de Medio</label>
+        <div class="col-sm-8">
+            <input type="text" name="dato2" placeholder="" class="form-control" required>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="dato3" style= "width: 20%;"class="col-sm-4 col-form-label">Nombre del Medio</label>
+        <div class="col-sm-8">
+            <input type="text" name="dato3" placeholder="" class="form-control" required>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="dato4" style= "width: 20%;"class="col-sm-4 col-form-label">Transmisión / VideoID</label>
+        <div class="col-sm-8">
+            <input type="text" name="dato4" placeholder="" class="form-control" required>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label for="dato5" style= "width: 20%;"class="col-sm-4 col-form-label">Link Imagen</label>
+        <div class="col-sm-8">
+            <input type="text" name="dato5" placeholder="" class="form-control" required>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="dato6" style= "width: 20%;"class="col-sm-4 col-form-label">Link del Medio</label>
+        <div class="col-sm-8">
+            <input type="text" name="dato6" placeholder="" class="form-control" required>
+        </div>
+    </div>
+
+    <br>
+    <div class="form-group"> 
+        <button type="submit" class="btn btn-info btn-block">Enviar</button><!-- Estilo para botón enviar -->
+        <button type="reset" class="btn btn-secondary btn-block">Cancelar</button><!-- Estilo para botón cancelar -->
+    </div>  
+</form>
+</div>
+
+
+<br>
+
+<div class="col-md-8">
+
+    <!-- Sentencia Jinja que sirve para recibir mensaje si la BBDD se ejecutó correctamente -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+
+<br>
+
+
+<!-- Cuadro de búsqueda -->
+<div class="col-md-6">
+    <form action="/bbddyoutube" method="POST" class="form-inline"> <!-- Forma de búsqueda -->
+        <input type="text" name="search_query" placeholder="Nombre del Medio" class="form-control" required>
+        <br>
+        <button type="submit" class="btn btn-info">Buscar</button>
+    </form>
+</div>
+
+
+<br><br>
+
+<h3>Reproductor Youtube - Tabla de Medios</h3>
+
+<br>
+<div class="col-md-8">
+    <button onclick="window.location.href='/descargar_excel'" class="btn btn-secondary">Descargar Tabla en Excel</button>
+</div>
+
+<br><br>
+
+<div class="col-md-12">
+<table class="table table-bordeded bg-white">
+<thead style="text-align:center;">
+<tr class="otrosdatos">
+<td>Reproductor</td>
+<td>Tipo de Medio</td>
+<td>Nombre del Medio</td>
+<td>Link Transmisión</td>
+<td>Link Imagen</td>
+<td>Link del medio</td>
+<td>Operaciones</td>
+</tr>
+</thead>
+<tbody>
+<!-- trae la tabla de la BBDD -->
+{% for tabla in tablas %}
+<tr>
+<td> {{tabla.1}}</td> 
+<td> {{tabla.2}}</td>
+<td> {{tabla.3}}</td>
+<td> {{tabla.4}}</td>
+<td> {{tabla.5}}</td>
+<td><a href ="{{tabla.6}}" target="_blank">{{tabla.6}}</a></td>
+<td> <a href="/modificar/{{tabla.0}}" class="btn btn-secondary">Modificar</a> <a href="/eliminar/{{tabla.0}}" class="btn btn-danger btn-delete">Eliminar</a></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<br><br>
+{% endblock %}

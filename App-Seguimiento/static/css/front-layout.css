@@ -1,0 +1,301 @@
+/* VERSIÓN ESCRITORIO - CSS DEL FRONT END DE PLATAFORMA - TODOS LOS INTERNAUTAS*/
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+:root,
+[data-bs-theme=light] {
+
+  --bs-primary: #3459e6;
+  --bs-secondary: #fff;
+  --bs-success: #2fb380;
+  --bs-info: #287bb5;
+  --bs-warning: #f4bd61;
+  --bs-danger: #da292e;
+  --bs-light: #f8f9fa;
+  --bs-dark: #212529;
+  --bs-font-sans-serif: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-font-size: 1rem;
+  --bs-body-font-weight: 400;
+  --bs-body-line-height: 1.5;
+  --bs-body-color: #495057;
+
+
+}
+
+
+body {
+    background-color: white;
+    font-family: var(--bs-body-font-family);
+    margin: 0; 
+    padding: 0; 
+    }
+    
+
+
+.menu {
+   
+    color: #fff;
+    list-style: none;
+    align-items: center;
+    font-weight: var(--bs-nav-link-font-weight);
+    font-size: var(--bs-body-font-size);
+    display: flex;
+    background-color: #212529;
+    justify-content: space-around;
+    padding-right: 200px;
+    padding-left: 0;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    margin: 0;
+    
+}
+
+
+.menu li {
+    
+    font-weight: var(--bs-nav-link-font-weight);
+    font-size: var(--bs-body-font-size);
+    list-style: none;
+    text-decoration: none;
+    color: #fff;
+    position: relative;
+    z-index: 1000;
+
+}
+
+.menu li a {
+    
+    font-weight: var(--bs-nav-link-font-weight);
+    font-size: var(--bs-body-font-size);
+    list-style: none;
+    text-decoration: none;
+    color: #fff;
+    
+}
+
+
+.menu li a:hover {
+
+    background-color: #010407;
+}
+
+
+
+.menu li:hover ul {
+
+display: block;
+}
+
+
+.menu ul {
+
+    display: none;
+    position: absolute;
+    background-color: #212529;
+  
+}
+
+.menu ul li a {
+
+    display: block;
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 30px;
+
+}
+
+
+
+
+    main  {
+        flex: 1; /* Hace que el main ocupe el espacio restante */
+        margin: 1px 1px 1px 1px; 
+        text-align: center; 
+        color: #2c2c2c;
+    
+        }
+
+        .titulotablacable {
+            
+            padding: 15px;
+            text-align: center; 
+            text-decoration: none; 
+            font-weight: bold;
+            color: #2c2c2c;
+            }
+
+
+         table {
+               
+                width: 90%;
+                margin-left: 70px;
+                text-align: center;
+                }
+                
+                tr th {
+                
+                text-align: center; 
+                padding: 8px;
+                text-decoration: none; 
+                color: black;
+                }
+            
+
+            .thlinks {
+ 
+            font-weight: bold;
+            color: black;
+            text-decoration: none; 
+            font-size: medium;
+           
+            }
+
+            .thlinks1 {
+      
+                font-weight: bold;
+                color:  #2c2c2c;
+                font-size: small;
+               
+                }
+
+             
+              
+                    
+                    #opciones {
+                        width: 12%; /* Ancho de las opciones */
+                        padding: 5px;
+                        border-right: 1px solid #ccc;
+                        font-family: var(--bs-body-font-family);
+                        display: inline-block; /* Cambiado para alinearlo con el reproductor */
+                        vertical-align: top; /* Alineación vertical */
+                        
+                    }
+
+
+                    #xopciones {
+                        width: 12%; /* Ancho de las opciones */
+                        padding: 5px;
+                        font-family: var(--bs-body-font-family);
+                        display: inline-block; /* Cambiado para alinearlo con el reproductor */
+                        vertical-align: top; /* Alineación vertical */
+                        
+                    }
+                    
+                    /*reproductor 6 pantallas*/
+                    #reproductores {
+                        display: flex;
+                        flex-direction: column; /* Permite colocar los grupos uno debajo del otro */
+                        width: 80%; /* Ajustado para mantener espacio */
+                        padding: 5px;
+                        justify-content: space-around;
+                        display: inline-block; /* Cambiado para alinearlo con las opciones */
+                        margin-top: 15px;
+                        z-index: 10;
+                        
+                    }
+
+                    /*reproductor 2 pantallas*/
+                    #xreproductores {
+                        display: flex;
+                        flex-direction: column; /* Permite colocar los grupos uno debajo del otro */
+                        width: 85%; /* Ajustado para mantener espacio */
+                        padding: 10px;
+                        justify-content: space-around;
+                        display: inline-block; /* Cambiado para alinearlo con las opciones */
+                        z-index: 10;
+                        
+                    }
+
+                    .row {
+                        display: flex;
+                        justify-content: space-around; /* Espacio entre los reproductores */
+                        margin-bottom: 5px; /* Espaciado entre las filas */
+                    }
+                    
+
+                    .row2 {
+                        display: flex;
+                        padding: 5px;
+                        margin-bottom: 5px; /* Espaciado entre las filas */
+                    }
+                    
+                    .reproductor {
+                        text-align: center;
+                        margin: 2.5px; /* Espaciado px entre reproductores */
+                    }
+                    
+                    .xreproductor {
+                        text-align: center;
+                        margin: 10px; /* Espaciado px entre reproductores */
+                    }
+                    
+                    #youtubePlayer, .clapprPlayer {
+                        width: 350px; /*ancho*/
+                        height: 230px; /*altura*/
+                        z-index: 10;
+                    }
+
+                    #xyoutubePlayer, .xclapprPlayer {
+                        height: 100%;
+                        width: 100%;
+                        z-index: 10;
+                    }
+
+                    #radioreproductores {
+                        display: flex;
+                        flex-direction: column; /* Organiza en columnas */
+                        align-items: center; /* Centra horizontalmente */
+                    }
+                    
+                    .fila {
+                        display: flex; /* Alinea los reproductores en una fila */
+                        justify-content: center; /* Centra en la fila */
+                        margin-bottom: 20px; /* Espacio entre las filas */
+                    }
+                    
+                    .radiorep {
+                        padding: 10px; /* Padding de 10px */
+                        text-align: center; /* Centra el contenido de cada reproductor */
+                    }
+                    
+                    .radiorep select {
+                        margin-top: 10px; /* Espacio adicional entre el reproductor y la lista */
+                    }
+
+
+                    .tabla1 {
+                        padding-top: 10px;
+                        padding-bottom: 20px;
+                        background-color:  #ececf7;
+                    }
+
+                    .tabla2 {
+                        padding-top: 10px;
+                        padding-bottom: 20px;
+                        background-color:#ffffff;
+                    }
+
+                    .tabla3 {
+                        padding-top: 10px;
+                        padding-bottom: 20px;
+                        background-color:#d8caff;
+                    }
+
+
+footer {
+ background-color: #212529;
+ text-align: center;
+ margin-top: 10px; 
+ padding: 10px; 
+ text-decoration: none; 
+ font-weight: bold;
+ color: white;
+                
+}
+
+                     
+                      
+

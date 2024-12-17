@@ -1,0 +1,62 @@
+<!-- FRONTEND- USUARIO ADMIN - BBDD YOUTUBE -->
+
+<!-- EXTENDS TRAE NAVEGADOR/FOOTER PARA FRONTEND USUARIO ADMIN -->
+{% extends 'layout.html' %}
+
+{% block body %}
+
+
+<div class= "img" style="text-align: center;">
+
+    <img src="https://imgur.com/yCR59Tr.png"  width="200"
+      height="200">
+  </div>
+
+  
+<br>
+
+  <h3 style="text-align: center;">Bienvenidos a la Base de Datos de SeguimientoAPP</h3>
+
+
+<br>
+<br>
+<br>
+<h5>Instrucciones para cargar un medio:</h5>
+<br>
+<ul> 
+<li>De acuerdo al tipo de reproductor -Youtube, M3u8 o Radios- ingrese a la pestaña de carga</li>
+<li>En cada formulario, ingresar todos los datos requeridos</li>
+<li>Están disponibles las opciones para modificar datos o eliminar un medio</li>
+</ul>
+<br>
+
+
+<br>
+<h5>Links de transmisión</h5>
+<br>
+<ul> 
+<li>En Youtube, se ingresa el VideoID</li>
+<li>Si el link en vivo del video es el siguiente: <i>https://www.youtube.com/watch?v=<b>cb12KmMMDJA</b></i>, el VideoID es <b>"cb12KmMMDJA"</b> </li>
+<li>En M3u8, se ingresa el link completo, por ejemplo: <i>https://stream1.sersat.com/hls/garagetv.m3u8</i> </li>
+<li>En Radios, se ingresa el link completo, por ejemplo: <i>https://sa.mp3.icecast.magma.edge-access.net/sc_rad1</i></li>
+<li>Recordar que en la categoría "Reproductor" se coloca el nombre del tipo de audio: mp3, aac o hls -medios m3u8-</li>
+</ul>
+<br>
+
+
+
+<br>
+<h5>Instrucciones para datos sobre un medio:</h5>
+<br>
+<ul> 
+<li>Ingrese a la pestaña "Otros Datos"</li>
+<li>Buscar el medio y editar todos los datos requeridos</li>
+</ul>
+<br>
+
+
+
+<br><br>
+{% endblock %}
+
+
